@@ -22,7 +22,11 @@ def handle_status(client, message: Message) -> bool:
         return False
     elif content.get("status") == NOT_REGISTERED:
         debug("User not registered.")
-        password = input("Enter your new password: ")
+        try:
+            password = input("Enter your new password: ")
+        except:
+            debug("Error reading password. Encoding error?")
+            return False
         debug("Computing keys...")
         keys = client.load_or_gen_keys()
         key_bundle = {
@@ -53,7 +57,11 @@ def handle_register(client, message: Message) -> bool:
         client.database.insert("pepper", pepper)
         debug(f"Received salt and pepper from server.")
         debug("User registered successfully. You can now login.")
-        password = input("Enter your password: ")
+        try:
+            password = input("Enter your new password: ")
+        except:
+            debug("Error reading password. Encoding error?")
+            return False
         if not login(client, password):
             debug("Error logging in.")
             return False
@@ -81,7 +89,12 @@ def handle_answer_salt(client, message: Message) -> bool:
         debug("Received invalid salt from server.")
         return False
     client.database.insert("salt", salt)
-    password = input("Received salt for login. Please enter your password: ")
+    try:
+        password = input("Received salt for login. Please enter your password: ")
+    except:
+        debug("Error reading password. Encoding error?")
+        return False
+
     if not login(client, password):
         debug("Error logging in.")
         return False

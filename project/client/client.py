@@ -108,7 +108,11 @@ class Client:
             debug("Type 'reset <target>' to reset the chat with a user.")
             debug("Type 'reset server' to delete your account.")
             while True:
-                msg = input()
+                try:
+                    msg = input()
+                except:
+                    debug("Error reading input. Maybe an unsupported encoding was used?")
+                    continue
                 if msg.lower() == "exit":
                     debug("Closing connection.")
                     self.stop_event.set()  # Signal the receive thread to stop
@@ -162,8 +166,11 @@ class Client:
 
     def start(self):
         self.connect()
-
-        self.username = input("Enter your username: ")
+        try:
+            self.username = input("Enter your username: ")
+        except:
+            debug("Error reading username. Encoding error?")
+            return False
         debug(f"Connected to server {self.host}:{self.port} as {self.username}.")
 
         self.database = Database(f"db/{self.username}/database.json", f"db/{self.username}/key.txt")
