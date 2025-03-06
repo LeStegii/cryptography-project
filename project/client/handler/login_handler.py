@@ -18,7 +18,7 @@ def login(client, password: str) -> bool:
 def handle_status(client, message: Message) -> bool:
     content = message.dict()
     if content.get("status") == ERROR:
-        debug(f"Received error from client: {content.get('error')}")
+        debug(f"Received error from server: {content.get('error')}")
         return False
     elif content.get("status") == NOT_REGISTERED:
         debug("User not registered.")

@@ -101,7 +101,7 @@ Received salt for login. Please enter your password: 345
 [15:08:01] MainThread: Connected to server localhost:25567.
 Enter your username: Paul
 [15:08:03] MainThread: Connected to server localhost:25567 as Paul.
-[15:08:03] Thread-1 (receive_message): Received error from client: A user with this name is already connected.
+[15:08:03] Thread-1 (receive_message): Received error from server: A user with this name is already connected.
 ```
 
 ### The server during all these actions

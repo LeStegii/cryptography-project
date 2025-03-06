@@ -154,7 +154,7 @@ class Client:
                         debug("Unknown command. Please use 'init', 'msg' or 'reset'.")
 
                 else:
-                    debug("Invalid message format. Please enter in the format '<type> [<receiver>]e [<message>]'.")
+                    debug("Invalid message format. Please enter in the format '<type> [<receiver>] [<message>]'.")
 
         except Exception:
             traceback.print_exc()
