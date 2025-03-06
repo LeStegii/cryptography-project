@@ -69,6 +69,7 @@ class DoubleRatchetState:
         self.last_sender = "THEM"
 
         iv, cipher, tag = message["iv"], message["cipher"], message["tag"]
+        self.index += 1
         try:
             return crypto_utils.aes_gcm_decrypt(mk, iv, cipher, b"AD", tag)
         except Exception as e:
